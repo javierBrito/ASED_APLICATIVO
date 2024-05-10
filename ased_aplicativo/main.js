@@ -5787,7 +5787,8 @@ var appRoutes = [{
   pathMatch: 'full'
 }, {
   path: '**',
-  redirectTo: '/pages/miscellaneous/error' //Error 404 - Page not found
+  //redirectTo: '/pages/miscellaneous/error' //Error 404 - Page not found
+  redirectTo: '/pages/authentication/login-v2' //Error 404 - Page not found
 
 }]; //console.log("appRoutes = ", appRoutes)
 
