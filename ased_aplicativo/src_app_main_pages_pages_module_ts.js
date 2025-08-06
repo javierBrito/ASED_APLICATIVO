@@ -225002,14 +225002,36 @@ var TransaccionPrincipalComponent = /*#__PURE__*/function () {
   }, {
     key: "enviarWhatsappApi",
     value: function enviarWhatsappApi(transaccion) {
+      var _a;
+
       return (0,tslib__WEBPACK_IMPORTED_MODULE_17__.__awaiter)(this, void 0, void 0, /*#__PURE__*/D_desarrollo_java_1_8_WorkSpaceAsedGit_ASED_FRONTEND_CODIGO_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().mark(function _callee14() {
         var _this22 = this;
 
-        var imageSrcString, dia, mes, año, codec, decodedValue;
+        var montoTransaccion, parteEntera, parteDecimal, numDiasRenovar, imageSrcString, dia, mes, año, codec, decodedValue;
         return D_desarrollo_java_1_8_WorkSpaceAsedGit_ASED_FRONTEND_CODIGO_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().wrap(function _callee14$(_context14) {
           while (1) {
             switch (_context14.prev = _context14.next) {
               case 0:
+                montoTransaccion = transaccion === null || transaccion === void 0 ? void 0 : transaccion.monto; //123.456;
+
+                parteEntera = Math.trunc(montoTransaccion); //console.log("Entero = ", parteEntera)
+
+                parteDecimal = parseFloat((montoTransaccion % 1).toFixed(2)); // Limitar decimales
+                //console.log("Decimal = ", parteDecimal)
+
+                if (parteDecimal < 0.099) {
+                  montoTransaccion = Math.trunc(transaccion === null || transaccion === void 0 ? void 0 : transaccion.monto);
+                } else {
+                  montoTransaccion = parseFloat((_a = transaccion === null || transaccion === void 0 ? void 0 : transaccion.monto) === null || _a === void 0 ? void 0 : _a.toFixed(2));
+                } //console.log("montoTransaccion = ", montoTransaccion)
+
+
+                numDiasRenovar = transaccion === null || transaccion === void 0 ? void 0 : transaccion.numDiasRenovar;
+
+                if (numDiasRenovar < 0) {
+                  numDiasRenovar = numDiasRenovar * -1;
+                }
+
                 imageSrcString = this.toDataURL('./assets/images/trofeo/trofeo1.png/'); //let fechaFin = dayjs(transaccion.fechaFin).format("DD-MM-YYYY");
 
                 dia = moment__WEBPACK_IMPORTED_MODULE_8___default()(transaccion === null || transaccion === void 0 ? void 0 : transaccion.fechaFin).format("D");
@@ -225017,7 +225039,16 @@ var TransaccionPrincipalComponent = /*#__PURE__*/function () {
                 año = moment__WEBPACK_IMPORTED_MODULE_8___default()(transaccion === null || transaccion === void 0 ? void 0 : transaccion.fechaFin).format("YYYY"); //transaccion.numDiasRenovar = transaccion?.numDiasRenovar == 0 ? 1 :transaccion?.numDiasRenovar; 
                 //this.mensajeCaduca = "*Mensaje Automático* Estimado(a) " + transaccion.nombreCliente + " el servicio de " + transaccion.descripcion + " que tiene contratado con nosotros está por caducar el " + fechaFin + ", favor su ayuda confirmando si desea renovarlo, caso contrario el día de corte procederemos con la suspención del mismo... Un excelente dia, tarde o noche....";
 
-                this.mensajeCaduca = "*Notificación Automática*%0a*Tu servicio Caducó o Caducará pronto*%0aEstimado(a) " + transaccion.nombreCliente + " el servicio de " + transaccion.descripcion + " que tiene contratado con nosotros está por caducar en " + (transaccion === null || transaccion === void 0 ? void 0 : transaccion.numDiasRenovar) + " día(s) el " + dia + " de " + mes + " de " + año + ", favor su ayuda confirmando la renovación con el pago correspondiente para poder registrarlo, caso contrario el día de corte procederemos con la suspención del servicio... Un excelente dia, tarde o noche...."; // Codificar el mensaje para asegurar que los caracteres especiales se manejen correctamente
+                this.mensajeCaduca = "*Notificación Automática*%0a*Tu servicio Caducó o Caducará pronto*%0aEstimado(a) " + transaccion.nombreCliente + " el servicio de " + transaccion.descripcion + " que tiene contratado con nosotros ";
+
+                if ((transaccion === null || transaccion === void 0 ? void 0 : transaccion.numDiasRenovar) > 0) {
+                  this.mensajeCaduca = this.mensajeCaduca + " está por caducar en ";
+                } else {
+                  this.mensajeCaduca = this.mensajeCaduca + " caducó hace ";
+                }
+
+                this.mensajeCaduca = this.mensajeCaduca + "*" + numDiasRenovar + " día(s) el " + dia + " de " + mes + " de " + año + "*" + ", favor su ayuda confirmando la renovación con el pago correspondiente para poder registrarlo, caso contrario el día de corte procederemos con la suspención del servicio... Un excelente dia, tarde o noche...." //Adicionar jbrito-20250805
+                + "%0a " + "%0aCosto de renovación: *$" + montoTransaccion + "*" + "%0aTiempo: *" + (transaccion === null || transaccion === void 0 ? void 0 : transaccion.numMes) + " Mes(es)*"; // Codificar el mensaje para asegurar que los caracteres especiales se manejen correctamente
 
                 codec = new _angular_common_http__WEBPACK_IMPORTED_MODULE_19__.HttpUrlEncodingCodec(); //const encodedValue = codec.encodeValue(mensajeNotificacion); // Encodes the value as 'Hello%20World%21'
 
@@ -225052,21 +225083,9 @@ var TransaccionPrincipalComponent = /*#__PURE__*/function () {
                   error: function error(_error5) {
                     _this22.mensajeService.mensajeError('Ha habido un problema al enviar las notificaciones ' + _error5);
                   }
-                }); // Enviar imagen
-
-                /*
-                this.transaccionService.enviarImagenWhatsappAI(this.celularEnvioWhatsapp, decodedValue, imageSrcString).subscribe({
-                  next: async (response) => {
-                    this.seEnvioWhatsapp = true;
-                    this.mensajeService.mensajeCorrecto('Las notificaciones se enviaron con éxito...');
-                  },
-                  error: (error) => {
-                    this.mensajeService.mensajeError('Ha habido un problema al enviar las notificaciones ' + error);
-                  }
                 });
-                */
 
-              case 10:
+              case 18:
               case "end":
                 return _context14.stop();
             }
