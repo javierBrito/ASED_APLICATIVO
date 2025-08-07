@@ -222662,7 +222662,6 @@ var FormTransaccionComponent = /*#__PURE__*/function () {
                 }
 
                 celularEnvioWhatsapp = (transaccion === null || transaccion === void 0 ? void 0 : transaccion.prefijoTelefonico) + (transaccion === null || transaccion === void 0 ? void 0 : transaccion.celular.substring(1, 15).trim()); //let celularEnvioWhatsapp = transaccion?.prefijoTelefonico + "992752367";
-                //let celularEnvioWhatsapp = transaccion?.prefijoTelefonico + "995038551";
                 // Enviar mensaje
 
                 this.transaccionService.enviarMensajeWhatsappAI(celularEnvioWhatsapp, decodedValue).subscribe({
@@ -225024,9 +225023,9 @@ var TransaccionPrincipalComponent = /*#__PURE__*/function () {
                   montoTransaccion = Math.trunc(transaccion === null || transaccion === void 0 ? void 0 : transaccion.monto);
                 } else {
                   montoTransaccion = parseFloat((_a = transaccion === null || transaccion === void 0 ? void 0 : transaccion.monto) === null || _a === void 0 ? void 0 : _a.toFixed(2));
-                } //console.log("montoTransaccion = ", montoTransaccion)
+                }
 
-
+                console.log("montoTransaccion = ", montoTransaccion);
                 numDiasRenovar = transaccion === null || transaccion === void 0 ? void 0 : transaccion.numDiasRenovar;
 
                 if (numDiasRenovar < 0) {
@@ -225087,7 +225086,7 @@ var TransaccionPrincipalComponent = /*#__PURE__*/function () {
                   }
                 });
 
-              case 18:
+              case 19:
               case "end":
                 return _context14.stop();
             }
