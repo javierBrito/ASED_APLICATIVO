@@ -222662,6 +222662,7 @@ var FormTransaccionComponent = /*#__PURE__*/function () {
                 }
 
                 celularEnvioWhatsapp = (transaccion === null || transaccion === void 0 ? void 0 : transaccion.prefijoTelefonico) + (transaccion === null || transaccion === void 0 ? void 0 : transaccion.celular.substring(1, 15).trim()); //let celularEnvioWhatsapp = transaccion?.prefijoTelefonico + "992752367";
+                //let celularEnvioWhatsapp = transaccion?.prefijoTelefonico + "995038551";
                 // Enviar mensaje
 
                 this.transaccionService.enviarMensajeWhatsappAI(celularEnvioWhatsapp, decodedValue).subscribe({
@@ -225060,6 +225061,7 @@ var TransaccionPrincipalComponent = /*#__PURE__*/function () {
                 }
 
                 this.celularEnvioWhatsapp = (transaccion === null || transaccion === void 0 ? void 0 : transaccion.prefijoTelefonico) + (transaccion === null || transaccion === void 0 ? void 0 : transaccion.celular.substring(1, 15).trim()); //this.celularEnvioWhatsapp = transaccion?.prefijoTelefonico + "992752367";
+                //this.celularEnvioWhatsapp = transaccion?.prefijoTelefonico + "995038551";
                 // Enviar mensaje
 
                 this.transaccionService.enviarMensajeWhatsappAI(this.celularEnvioWhatsapp, decodedValue).subscribe({
