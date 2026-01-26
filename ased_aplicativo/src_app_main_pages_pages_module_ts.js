@@ -222596,8 +222596,8 @@ var FormTransaccionComponent = /*#__PURE__*/function () {
           while (1) {
             switch (_context11.prev = _context11.next) {
               case 0:
-                imageSrcString = this.toDataURL('./assets/images/trofeo/trofeo1.png/');
-                console.log("imageSrcString = ", imageSrcString); // Obtener las n cuentas con su clave de la lista si los hay
+                imageSrcString = this.toDataURL('./assets/images/trofeo/trofeo1.png/'); //console.log("imageSrcString = ", imageSrcString)
+                // Obtener las n cuentas con su clave de la lista si los hay
 
                 cuentaClaveNotifica = "";
 
@@ -222708,7 +222708,7 @@ var FormTransaccionComponent = /*#__PURE__*/function () {
                   }
                 });
 
-              case 20:
+              case 19:
               case "end":
                 return _context11.stop();
             }
